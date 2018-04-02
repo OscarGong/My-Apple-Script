@@ -1,5 +1,5 @@
 # My-Apple-Script
-Here are some Apple Scripts for my personal usage.
+Here are some Apple Scripts for my personal usages.
 
 You can take advantage of these scripts best by using some automation tools such like [Keyboard Maestro](https://www.keyboardmaestro.com/) and [LaunchBar](https://www.obdev.at/launchbar).
 
