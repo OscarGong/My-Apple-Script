@@ -1,0 +1,25 @@
+--For using, first locate your Evernote Databse: Hold Option and press [Help] in Menubar -> [Troubleshooting] -> [Open Database Folder]
+
+-- Paste the folder path after "targetDatabaseFolder" below.
+
+--Identify the Note GUID
+
+tell application "Evernote"
+	set theSelection to get selection
+	set theNote to item 1 of theSelection
+	set theLink to note link of theNote
+end tell
+
+set AppleScript's text item delimiters to "/"
+set parsedList to text items of theLink
+set noteGUID to item 7 of parsedList
+
+--Retrieve the Note Folder from the database
+
+set targetDatabaseFolder to "/Users/Oscar/Library/Application Support/com.evernote.Evernote/accounts/www.evernote.com/105267012/"
+set targetDatabaseFile to targetDatabaseFolder & "LocalNoteStore/LocalNoteStore.sqlite"
+set sqlText to "SELECT ZLOCALUUID FROM ZenNote where ZGUID = '" & noteGUID & "';"
+set localFolder to text items of (do shell script "sqlite3 " & quote & targetDatabaseFile & quote & " " & quote & sqlText & quote)
+set localFolder to targetDatabaseFolder & "content/" & localFolder
+
+tell application "Finder" to open folder localFolder as POSIX file
